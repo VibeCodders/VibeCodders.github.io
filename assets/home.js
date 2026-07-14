@@ -21,6 +21,7 @@
             downloadAria: (t) => 'Scarica ' + t + ' da GitHub',
             githubAria: (t) => t + ' su GitHub',
             visitAria: (t) => 'Visita il sito di ' + t,
+            noResults: 'Nessun progetto trovato.',
             error: 'Impossibile caricare l’elenco dei progetti.'
         },
         en: {
@@ -33,6 +34,7 @@
             downloadAria: (t) => 'Download ' + t + ' from GitHub',
             githubAria: (t) => t + ' on GitHub',
             visitAria: (t) => 'Visit the ' + t + ' website',
+            noResults: 'No projects found.',
             error: 'Unable to load the project list.'
         }
     };
@@ -160,7 +162,60 @@
         return isNaN(n) ? Infinity : n;
     }
 
+    function buildHaystack(meta) {
+        return [meta.title, meta.subtitle, meta.description, meta.tags, meta.language]
+            .filter(Boolean).join(' ');
+    }
+
+    // Live fuzzy search over the rendered cards.
+    let cards = [];          // [{ el, haystack }] in original (sorted) order
+    let currentQuery = '';
+    let currentLang = 'it';
+    let noResultsEl = null;
+
+    function ensureNoResults() {
+        if (!noResultsEl) {
+            noResultsEl = document.createElement('p');
+            noResultsEl.className = 'no-results';
+            noResultsEl.style.display = 'none';
+            grid.parentNode.insertBefore(noResultsEl, grid.nextSibling);
+        }
+        return noResultsEl;
+    }
+
+    function applyFilter(q) {
+        const S = STRINGS[currentLang] || STRINGS.it;
+        const nr = ensureNoResults();
+
+        if (!q) {
+            // Restore the original order and show everything.
+            cards.forEach((c) => { c.el.style.display = ''; grid.appendChild(c.el); });
+            nr.style.display = 'none';
+            return;
+        }
+
+        let matches;
+        if (window.fuzzy && fuzzy.filter) {
+            matches = fuzzy.filter(q, cards, { extract: (c) => c.haystack })
+                .sort((a, b) => b.score - a.score)
+                .map((r) => r.original);
+        } else {
+            const ql = q.toLowerCase();
+            matches = cards.filter((c) => c.haystack.toLowerCase().indexOf(ql) !== -1);
+        }
+
+        cards.forEach((c) => { c.el.style.display = 'none'; });
+        if (matches.length === 0) {
+            nr.textContent = S.noResults;
+            nr.style.display = '';
+        } else {
+            nr.style.display = 'none';
+            matches.forEach((c) => { c.el.style.display = ''; grid.appendChild(c.el); });
+        }
+    }
+
     function render(lang) {
+        currentLang = lang;
         listProjectSlugs()
             .then((slugs) => Promise.all(slugs.map((s) => loadMeta(s, lang))))
             .then((metas) => {
@@ -170,13 +225,26 @@
                     return (a.title || '').localeCompare(b.title || '');
                 });
                 grid.innerHTML = '';
-                metas.forEach((m) => grid.appendChild(buildCard(m, lang)));
+                cards = metas.map((m) => {
+                    const el = buildCard(m, lang);
+                    grid.appendChild(el);
+                    return { el: el, haystack: buildHaystack(m) };
+                });
+                applyFilter(currentQuery);
             })
             .catch((err) => {
                 console.error(err);
                 const S = STRINGS[lang] || STRINGS.it;
                 grid.innerHTML = '<p style="color:#999;text-align:center;">' + S.error + '</p>';
             });
+    }
+
+    const searchInput = document.getElementById('project-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            currentQuery = searchInput.value.trim();
+            applyFilter(currentQuery);
+        });
     }
 
     if (window.I18N) {

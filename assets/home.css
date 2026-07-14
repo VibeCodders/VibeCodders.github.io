@@ -20,6 +20,41 @@ h1 {
     font-size: 1.1rem;
 }
 
+.search-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 0;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 480px;
+    background: #16161e;
+    border: 1px solid #2a2a3a;
+    border-radius: 24px;
+    color: #e0e0e0;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input::placeholder {
+    color: #666;
+}
+
+.search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.no-results {
+    color: #999;
+    text-align: center;
+    padding: 20px 0 60px;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
