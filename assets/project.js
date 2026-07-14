@@ -12,12 +12,14 @@
         it: {
             view: 'Visualizza su GitHub',
             download: "⬇️ Scarica l'ultima versione",
+            visit: '🌐 Visita il Sito',
             footerRepo: (t) => t + ' su GitHub',
             error: 'Impossibile caricare il contenuto del progetto.'
         },
         en: {
             view: 'View on GitHub',
             download: '⬇️ Download latest release',
+            visit: '🌐 Visit the Site',
             footerRepo: (t) => t + ' on GitHub',
             error: 'Unable to load project content.'
         }
@@ -126,28 +128,30 @@
         marked.setOptions({ gfm: true, breaks: false });
         contentEl.innerHTML = marked.parse(body);
 
-        // Action buttons, inserted right after the intro paragraph
-        if (meta.repo || meta.download) {
-            const group = document.createElement('div');
-            group.className = 'btn-group';
-            if (meta.repo) {
-                const a = document.createElement('a');
-                a.href = meta.repo;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.className = 'btn';
-                a.textContent = S.view;
-                group.appendChild(a);
-            }
-            if (meta.download) {
-                const a = document.createElement('a');
-                a.href = meta.download;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.className = 'btn btn-secondary';
-                a.textContent = meta.downloadLabel || S.download;
-                group.appendChild(a);
-            }
+        // Action buttons, inserted right after the intro paragraph.
+        // First button is always GitHub; the second one only shows for a live
+        // site (demo) or a release download.
+        const group = document.createElement('div');
+        group.className = 'btn-group';
+
+        const addBtn = (href, cls, text) => {
+            const a = document.createElement('a');
+            a.href = href;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.className = cls;
+            a.textContent = text;
+            group.appendChild(a);
+        };
+
+        if (meta.repo) addBtn(meta.repo, 'btn', S.view);
+        if (meta.demo) {
+            addBtn(meta.demo, 'btn btn-secondary', S.visit);
+        } else if (meta.download && /releases/.test(meta.download)) {
+            addBtn(meta.download, 'btn btn-secondary', meta.downloadLabel || S.download);
+        }
+
+        if (group.children.length) {
             const firstP = contentEl.querySelector('p');
             if (firstP) firstP.after(group);
             else contentEl.insertBefore(group, contentEl.firstChild);

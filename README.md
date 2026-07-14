@@ -32,9 +32,15 @@ bundler.
 │       ├── index.html      # Tiny shell (identical for every project)
 │       ├── content.it.md   # Italian content + frontmatter
 │       └── content.en.md   # English content + frontmatter
-├── sitemap.xml
-└── robots.txt
+├── sitemap.xml             # Also the source of truth for the homepage project list
+├── robots.txt
+└── .nojekyll               # Disables Jekyll so .md files are served verbatim
 ```
+
+> **Why `.nojekyll`?** GitHub Pages runs Jekyll by default, which treats files that start with `---`
+> front matter (our `content.*.md`) as pages and converts them to HTML — so the raw `.md` URLs would
+> 404. `.nojekyll` turns that off and serves every file as-is. (A plain local static server never does
+> this, which is why the site works locally without it.)
 
 ### Content lives in Markdown
 
@@ -44,10 +50,10 @@ client-side by `assets/project.js`. Editing a project means editing Markdown, no
 
 ### The homepage is dynamic
 
-`index.html` never lists projects directly. `assets/home.js` discovers the folders under `projects/`
-at runtime via the [GitHub Contents API](https://docs.github.com/rest/repos/contents) and builds one
-card per folder from that folder's frontmatter. **Adding a project never requires touching
-`index.html`.**
+`index.html` never lists projects directly. `assets/home.js` reads `sitemap.xml` (same origin, no
+external API), collects every `/projects/<slug>/` entry, and builds one card per project from that
+folder's `content.<lang>.md` frontmatter. **Adding a project never requires touching `index.html`** —
+only a `sitemap.xml` entry.
 
 ### Internationalisation
 
@@ -61,10 +67,11 @@ attributes; project pages simply load the matching `content.<lang>.md`.
 1. Create `projects/<slug>/` with:
    - `index.html` — copy it verbatim from any existing project folder (it is identical everywhere).
    - `content.it.md` and `content.en.md` — see the frontmatter fields below.
-2. Commit and push.
+2. Add a `<url>` entry for `https://VibeCodders.github.io/projects/<slug>/` to `sitemap.xml`
+   (this is what the homepage reads to list the project).
+3. Commit and push.
 
-That's it. The homepage picks the new folder up automatically once it is on the repo's default branch.
-Optionally add a `<url>` entry to `sitemap.xml` (SEO only — the site works without it).
+`index.html` is never edited.
 
 ### Frontmatter fields
 
@@ -99,6 +106,5 @@ python3 -m http.server 8000
 # then browse http://localhost:8000/
 ```
 
-Note: the homepage card list is fetched from the GitHub API and reflects the repo's **default branch**,
-so locally-added (uncommitted) project folders only appear on the live site after they are pushed.
-Individual project pages render from local files and work offline via the local server.
+Everything (the homepage list from `sitemap.xml` and each project's Markdown) is fetched same-origin,
+so the site renders fully from the local server with no network dependency.

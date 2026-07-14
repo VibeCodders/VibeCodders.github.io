@@ -9,8 +9,6 @@ tags: C++, CMake, Linux, Kinect, Howdy, v4l2loopback
 language: C++
 os: Linux
 repo: https://github.com/stignarnia/kinect2pipe-IR
-downloadLabel: ⬇️ Vedi le istruzioni di build
-download: https://github.com/stignarnia/kinect2pipe-IR#readme
 ---
 
 **kinect2pipe-IR** permette a un sensore **Kinect 2** di funzionare come webcam a infrarossi su sistemi Linux, pensato in particolare per lo sblocco tramite riconoscimento facciale con **Howdy**. L'applicazione cattura lo stream IR dal sensore e lo instrada attraverso un dispositivo video virtuale. È un fork specializzato dell'originale kinect2pipe, focalizzato sulla gestione dello stream a infrarossi anziché sulla cattura video RGB.

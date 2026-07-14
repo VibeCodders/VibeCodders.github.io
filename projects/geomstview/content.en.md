@@ -9,8 +9,7 @@ tags: JavaScript, Leaflet, WebAssembly, Vite, PWA, OpenStreetMap
 language: JavaScript
 os: Web
 repo: https://github.com/stignarnia/GeoMSTView
-downloadLabel: ⬇️ See build instructions
-download: https://github.com/stignarnia/GeoMSTView#readme
+demo: https://geomstview.pages.dev
 ---
 
 **GeoMSTView** is an interactive web application that computes and displays the **Minimum Spanning Tree** (MST) connecting a set of cities from **OpenStreetMap** data. Users can watch how the algorithm connects the cities with the shortest total distance, animating the edge-building process.

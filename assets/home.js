@@ -1,14 +1,11 @@
 // Dynamic homepage project grid.
-// The list of projects is NOT hard-coded: it is discovered at runtime from the
-// folders inside /projects via the GitHub Contents API (one request per load,
-// CORS-enabled). Each card is then built from that folder's
-// content.<lang>.md frontmatter. Adding a new project therefore only requires
-// creating a new projects/<slug>/ folder with its content files — index.html
-// never needs to be touched.
+// The list of projects is NOT hard-coded in index.html: it is discovered at
+// runtime by reading sitemap.xml (same origin, no API) and collecting every
+// /projects/<slug>/ entry. Each card is then built from that folder's
+// content.<lang>.md frontmatter. Adding a new project means creating the
+// projects/<slug>/ folder and adding its <url> entry to sitemap.xml.
 (function () {
-    const OWNER = 'VibeCodders';
-    const REPO = 'VibeCodders.github.io';
-    const API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/projects';
+    const SITEMAP = '/sitemap.xml';
 
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
@@ -18,20 +15,24 @@
             details: 'Dettagli',
             download: 'Scarica',
             github: 'GitHub',
+            visit: 'Visita il Sito',
             techs: 'Tecnologie utilizzate',
             detailsAria: (t) => 'Dettagli progetto ' + t,
             downloadAria: (t) => 'Scarica ' + t + ' da GitHub',
             githubAria: (t) => t + ' su GitHub',
+            visitAria: (t) => 'Visita il sito di ' + t,
             error: 'Impossibile caricare l’elenco dei progetti.'
         },
         en: {
             details: 'Details',
             download: 'Download',
             github: 'GitHub',
+            visit: 'Visit the Site',
             techs: 'Technologies used',
             detailsAria: (t) => t + ' project details',
             downloadAria: (t) => 'Download ' + t + ' from GitHub',
             githubAria: (t) => t + ' on GitHub',
+            visitAria: (t) => 'Visit the ' + t + ' website',
             error: 'Unable to load the project list.'
         }
     };
@@ -56,16 +57,20 @@
 
     function listProjectSlugs() {
         if (slugCache) return Promise.resolve(slugCache);
-        return fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
+        return fetch(SITEMAP)
             .then((r) => {
-                if (!r.ok) throw new Error('GitHub API ' + r.status);
-                return r.json();
+                if (!r.ok) throw new Error('sitemap ' + r.status);
+                return r.text();
             })
-            .then((items) => {
-                slugCache = items
-                    .filter((i) => i.type === 'dir' && i.name !== 'assets')
-                    .map((i) => i.name);
-                return slugCache;
+            .then((xml) => {
+                const doc = new DOMParser().parseFromString(xml, 'application/xml');
+                const slugs = [];
+                Array.from(doc.getElementsByTagName('loc')).forEach((loc) => {
+                    const m = (loc.textContent || '').trim().match(/\/projects\/([^/]+)\/?$/);
+                    if (m && slugs.indexOf(m[1]) === -1) slugs.push(m[1]);
+                });
+                slugCache = slugs;
+                return slugs;
             });
     }
 
@@ -128,16 +133,19 @@
             link('projects/' + slug + '/index.html', 'btn-details', S.details, S.detailsAria(title))
         );
 
-        // A real release download links to the release; otherwise fall back to
-        // a plain "GitHub" button pointing at the repository.
+        // Secondary button: a live site if the project has one, otherwise a
+        // release download, otherwise a plain "GitHub" button to the repo.
         const isRelease = meta.download && /releases/.test(meta.download);
-        if (isRelease) {
-            const a = link(meta.download, 'btn-download', S.download, S.downloadAria(title));
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            actions.appendChild(a);
+        let href, label, aria;
+        if (meta.demo) {
+            href = meta.demo; label = S.visit; aria = S.visitAria(title);
+        } else if (isRelease) {
+            href = meta.download; label = S.download; aria = S.downloadAria(title);
         } else if (meta.repo) {
-            const a = link(meta.repo, 'btn-download', S.github, S.githubAria(title));
+            href = meta.repo; label = S.github; aria = S.githubAria(title);
+        }
+        if (href) {
+            const a = link(href, 'btn-download', label, aria);
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
             actions.appendChild(a);
