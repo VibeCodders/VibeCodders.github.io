@@ -13,4 +13,19 @@
         <lastmod>2026-07-14</lastmod>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://VibeCodders.github.io/projects/postgrest/</loc>
+        <lastmod>2026-07-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://VibeCodders.github.io/projects/kinect2pipe-ir/</loc>
+        <lastmod>2026-07-14</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://VibeCodders.github.io/projects/geomstview/</loc>
+        <lastmod>2026-07-14</lastmod>
+        <priority>0.8</priority>
+    </url>
 </urlset>

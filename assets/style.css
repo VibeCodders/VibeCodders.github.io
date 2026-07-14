@@ -1,0 +1,179 @@
+/* Project-page styles. Loaded after base.css. */
+
+/* Overrides of base.css defaults */
+body {
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #764ba2;
+    text-decoration: none;
+}
+
+header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid #1a1a2e;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #1e1e2e;
+    color: #667eea;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #2a2a3a;
+}
+
+.content {
+    padding-bottom: 80px;
+}
+
+.content h2 {
+    font-size: 1.6rem;
+    color: #fff;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+.content h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin: 30px 0 12px;
+}
+
+.content p {
+    color: #b0b0b0;
+    margin-bottom: 16px;
+}
+
+.content ul {
+    color: #b0b0b0;
+    margin: 16px 0 16px 24px;
+}
+
+.content li {
+    margin-bottom: 8px;
+}
+
+.content strong {
+    color: #fff;
+}
+
+pre {
+    background: #16161e;
+    border: 1px solid #2a2a3a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+}
+
+code {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #a5b4fc;
+}
+
+a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 40px;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: #1e1e2e;
+    color: #667eea;
+    border: 1px solid #2a2a3a;
+}
+
+.btn-secondary:hover {
+    border-color: #667eea;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+th {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    color: #b0b0b0;
+}
