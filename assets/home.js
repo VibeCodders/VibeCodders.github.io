@@ -194,14 +194,25 @@
             return;
         }
 
+        const MAX_RESULTS = 3;
         let matches;
         if (window.fuzzy && fuzzy.filter) {
-            matches = fuzzy.filter(q, cards, { extract: (c) => c.haystack })
-                .sort((a, b) => b.score - a.score)
+            // Fuzzy matching is subsequence-based, so on long haystacks almost
+            // everything matches weakly. Rank by score, drop matches far below
+            // the best one (removes noise while keeping ranking + typo
+            // tolerance), then show at most the top few.
+            const ranked = fuzzy.filter(q, cards, { extract: (c) => c.haystack })
+                .sort((a, b) => b.score - a.score);
+            const best = ranked.length ? ranked[0].score : 0;
+            matches = ranked
+                .filter((r) => r.score >= best * 0.5)
+                .slice(0, MAX_RESULTS)
                 .map((r) => r.original);
         } else {
             const ql = q.toLowerCase();
-            matches = cards.filter((c) => c.haystack.toLowerCase().indexOf(ql) !== -1);
+            matches = cards
+                .filter((c) => c.haystack.toLowerCase().indexOf(ql) !== -1)
+                .slice(0, MAX_RESULTS);
         }
 
         cards.forEach((c) => { c.el.style.display = 'none'; });
