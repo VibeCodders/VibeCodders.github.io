@@ -112,6 +112,44 @@
             gap: 4px;
         }
         
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .card-actions a {
+            flex: 1;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        
+        .btn-details {
+            background: #1e1e2e;
+            color: #667eea;
+            border: 1px solid #2a2a3a;
+        }
+        
+        .btn-details:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+        
         footer {
             text-align: center;
             padding: 40px 0;
@@ -129,7 +167,7 @@
         </header>
         
         <main class="projects-grid">
-            <a href="projects/artnet-server/index.html" class="project-card">
+            <div class="project-card">
                 <h2>ArtnetServer</h2>
                 <p>Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX. Supporta modalità GUI, CLI e Headless.</p>
                 <div class="tags">
@@ -139,7 +177,11 @@
                     <span class="tag">Art-Net</span>
                     <span class="tag">DMX</span>
                 </div>
-            </a>
+                <div class="card-actions">
+                    <a href="projects/artnet-server/index.html" class="btn-details">Dettagli</a>
+                    <a href="https://github.com/VibeCodders/ArtnetServer/releases/latest" target="_blank" class="btn-download" download>Scarica</a>
+                </div>
+            </div>
         </main>
         
         <footer>
