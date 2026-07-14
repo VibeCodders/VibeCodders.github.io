@@ -1,35 +1,106 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="ArtnetServer è un server Art-Net Node scritto in C# (.NET 10.0) che riceve pacchetti DMX via rete e li inoltra a interfacce hardware DMX. Supporta GUI, CLI e Headless.">
+    <meta name="keywords" content="ArtnetServer, Art-Net, DMX, C#, .NET 10, WPF, server DMX, node server, lighting control, VibeCodders">
+    <meta name="author" content="VibeCodders">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://VibeCodders.github.io/projects/artnet-server/">
+
     <title>ArtnetServer - VibeCodders</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='system-ui'>⚡</text></svg>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://VibeCodders.github.io/projects/artnet-server/">
+    <meta property="og:title" content="ArtnetServer - VibeCodders">
+    <meta property="og:description" content="Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX. Supporta GUI, CLI e Headless.">
+    <meta property="og:image" content="https://VibeCodders.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ArtnetServer - Server Art-Net Node">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="VibeCodders">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://VibeCodders.github.io/projects/artnet-server/">
+    <meta name="twitter:title" content="ArtnetServer - VibeCodders">
+    <meta name="twitter:description" content="Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX.">
+    <meta name="twitter:image" content="https://VibeCodders.github.io/og-image.png">
+    <meta name="twitter:image:alt" content="ArtnetServer - Server Art-Net Node">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ArtnetServer",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, Linux, macOS",
+        "programmingLanguage": "C#",
+        "description": "Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX. Supporta modalità GUI, CLI e Headless.",
+        "author": {
+            "@type": "Organization",
+            "name": "VibeCodders",
+            "url": "https://VibeCodders.github.io"
+        },
+        "url": "https://VibeCodders.github.io/projects/artnet-server/",
+        "codeRepository": "https://github.com/VibeCodders/ArtnetServer",
+        "downloadUrl": "https://github.com/VibeCodders/ArtnetServer/releases/latest",
+        "license": "https://github.com/VibeCodders/ArtnetServer",
+        "keywords": "Art-Net, DMX, C#, .NET, WPF, lighting control, server"
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: #0a0a0f;
             color: #e0e0e0;
             line-height: 1.7;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        header {
-            padding: 60px 0 40px;
+
+        nav {
+            padding: 20px 0;
             border-bottom: 1px solid #1a1a2e;
-            margin-bottom: 40px;
         }
-        
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-brand:hover {
+            text-decoration: none;
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -40,30 +111,37 @@
             margin-bottom: 20px;
             transition: color 0.2s;
         }
-        
+
         .back-link:hover {
             color: #764ba2;
+            text-decoration: none;
         }
-        
+
+        header {
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #1a1a2e;
+            margin-bottom: 40px;
+        }
+
         h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: #fff;
         }
-        
+
         .subtitle {
             color: #888;
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
-        
+
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .tag {
             background: #1e1e2e;
             color: #667eea;
@@ -73,11 +151,11 @@
             font-weight: 500;
             border: 1px solid #2a2a3a;
         }
-        
+
         .content {
             padding-bottom: 80px;
         }
-        
+
         .content h2 {
             font-size: 1.6rem;
             color: #fff;
@@ -85,25 +163,31 @@
             padding-bottom: 8px;
             border-bottom: 1px solid #1a1a2e;
         }
-        
+
+        .content h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin: 30px 0 12px;
+        }
+
         .content p {
             color: #b0b0b0;
             margin-bottom: 16px;
         }
-        
+
         .content ul {
             color: #b0b0b0;
             margin: 16px 0 16px 24px;
         }
-        
+
         .content li {
             margin-bottom: 8px;
         }
-        
+
         .content strong {
             color: #fff;
         }
-        
+
         pre {
             background: #16161e;
             border: 1px solid #2a2a3a;
@@ -112,22 +196,29 @@
             overflow-x: auto;
             margin: 16px 0 24px;
         }
-        
+
         code {
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 0.9rem;
             color: #a5b4fc;
         }
-        
+
         a {
             color: #667eea;
             text-decoration: none;
         }
-        
+
         a:hover {
             text-decoration: underline;
         }
-        
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0 40px;
+        }
+
         .btn {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -136,28 +227,37 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            margin-top: 20px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
             text-decoration: none;
         }
-        
+
+        .btn-secondary {
+            background: #1e1e2e;
+            color: #667eea;
+            border: 1px solid #2a2a3a;
+        }
+
+        .btn-secondary:hover {
+            border-color: #667eea;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 16px 0 24px;
         }
-        
+
         th, td {
             padding: 12px 16px;
             text-align: left;
             border-bottom: 1px solid #1a1a2e;
         }
-        
+
         th {
             color: #667eea;
             font-weight: 600;
@@ -165,11 +265,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         td {
             color: #b0b0b0;
         }
-        
+
         footer {
             text-align: center;
             padding: 40px 0;
@@ -177,107 +277,129 @@
             font-size: 0.9rem;
             border-top: 1px solid #1a1a2e;
         }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="../../index.html" class="back-link">← Torna ai progetti</a>
-            <h1>ArtnetServer</h1>
-            <p class="subtitle">Art-Net to DMX Node Server</p>
-            <div class="tags">
-                <span class="tag">C#</span>
-                <span class="tag">.NET 10</span>
-                <span class="tag">WPF</span>
-                <span class="tag">Art-Net</span>
-                <span class="tag">DMX</span>
-            </div>
-        </header>
-        
-        <main class="content">
-            <p>Questo progetto è un server <strong>Art-Net Node</strong> scritto in C# (.NET 10.0) che riceve pacchetti DMX via rete (protocollo Art-Net) e li inoltra a un'interfaccia hardware DMX. Il codice è progettato per massimizzare la condivisione logica ed è eseguibile in tre modalità distinte: <strong>GUI</strong> (Grafica), <strong>CLI</strong> (Console interattiva) e <strong>Headless</strong> (Silenziosa in background).</p>
-            
-            <a href="https://github.com/VibeCodders/ArtnetServer" target="_blank" class="btn">Visualizza su GitHub</a>
-            <a href="https://github.com/VibeCodders/ArtnetServer/releases/latest" target="_blank" class="btn">⬇️ Scarica l'ultima versione</a>
-            
-            <h2>🚀 Modalità di Esecuzione</h2>
-            <p>Puoi selezionare la modalità desiderata passando il parametro <code>-m</code> o <code>--mode</code> all'avvio.</p>
-            
-            <h3>1. 🖥️ Modalità GUI (Interfaccia Grafica)</h3>
-            <p>Avvia l'interfaccia utente grafica (WPF) ricca di animazioni, che mostra in tempo reale i valori dei 512 canali DMX, le statistiche dei pacchetti e permette la configurazione visuale dei parametri.</p>
-            <pre><code>dotnet run</code></pre>
-            
-            <h3>2. 📟 Modalità CLI (Riga di Comando)</h3>
-            <p>Avvia un terminale testuale interattivo direttamente all'interno della console corrente. Mostra i log dell'engine in tempo reale ed espone statistiche aggregate.</p>
-            <ul>
-                <li><code>S</code> / <code>stats</code> - Mostra le statistiche dettagliate correnti</li>
-                <li><code>C</code> / <code>clear</code> - Pulisce la schermata della console</li>
-                <li><code>H</code> / <code>help</code> - Mostra l'elenco dei comandi disponibili</li>
-                <li><code>Q</code> / <code>quit</code> / <code>exit</code> - Ferma in sicurezza l'engine Art-Net</li>
-            </ul>
-            <pre><code>dotnet run -- --mode cli --driver simulation</code></pre>
-            
-            <h3>3. 👤 Modalità Headless (Silenziosa / Background)</h3>
-            <p>Esegue il server in background in modo totalmente trasparente e silenzioso, senza mostrare alcuna GUI o stampare log in console. Ideale per essere integrato come servizio o script di avvio automatico.</p>
-            <pre><code>dotnet run -- --mode headless --driver simulation --universe 0</code></pre>
-            
-            <h2>⚙️ Parametri della Linea di Comando</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Breve</th>
-                        <th>Esteso</th>
-                        <th>Descrizione</th>
-                        <th>Default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>-m</code></td><td><code>--mode</code></td><td>Modalità: gui, cli, headless</td><td>gui</td></tr>
-                    <tr><td><code>-i</code></td><td><code>--ip</code></td><td>Indirizzo IP di bind</td><td>0.0.0.0</td></tr>
-                    <tr><td><code>-p</code></td><td><code>--port</code></td><td>Porta UDP di ascolto</td><td>6454</td></tr>
-                    <tr><td><code>-u</code></td><td><code>--universe</code></td><td>Numero universo Art-Net</td><td>0</td></tr>
-                    <tr><td><code>-d</code></td><td><code>--driver</code></td><td>Tipo driver DMX</td><td>simulation</td></tr>
-                    <tr><td><code>-c</code></td><td><code>--com</code></td><td>Porta seriale COM</td><td>—</td></tr>
-                    <tr><td><code>-dev</code></td><td><code>--device</code></td><td>Interfaccia DMX (universo,driver,com)</td><td>—</td></tr>
-                    <tr><td><code>-h</code></td><td><code>--help</code></td><td>Mostra la guida</td><td>—</td></tr>
-                </tbody>
-            </table>
-            
-            <h2>📁 Struttura del Progetto</h2>
-            <ul>
-                <li><strong>Core/</strong> - Motore principale, server HTTP, merge manager, health check, logging</li>
-                <li><strong>Drivers/</strong> - Driver di uscita DMX hardware (Enttec, OpenDMX, FTDI, ecc.)</li>
-                <li><strong>Views/</strong> - Interfaccia grafica WPF</li>
-                <li><strong>Tests/</strong> - Test unitari xUnit</li>
-            </ul>
-            
-            <h2>📊 API HTTP</h2>
-            <p>Quando abilitata con <code>--enable-http</code>, sono disponibili i seguenti endpoint:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Metodo</th>
-                        <th>Endpoint</th>
-                        <th>Descrizione</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>GET</td><td><code>/</code></td><td>Dashboard HTML</td></tr>
-                    <tr><td>GET</td><td><code>/api/status</code></td><td>Stato del server e delle interfacce</td></tr>
-                    <tr><td>GET</td><td><code>/api/dmx?universe=</code></td><td>Dati DMX correnti</td></tr>
-                    <tr><td>GET</td><td><code>/api/events</code></td><td>Eventi in tempo reale (SSE)</td></tr>
-                    <tr><td>GET</td><td><code>/api/universes</code></td><td>Lista universi attivi</td></tr>
-                    <tr><td>POST</td><td><code>/api/blackout</code></td><td>Attiva/disattiva blackout</td></tr>
-                    <tr><td>POST</td><td><code>/api/override/set</code></td><td>Imposta override canale</td></tr>
-                    <tr><td>POST</td><td><code>/api/override/clear-channel</code></td><td>Cancella override canale</td></tr>
-                    <tr><td>POST</td><td><code>/api/override/clear</code></td><td>Cancella tutti gli override</td></tr>
-                </tbody>
-            </table>
-        </main>
-        
-        <footer>
-            <p>VibeCodders - <a href="https://github.com/VibeCodders/ArtnetServer" target="_blank">ArtnetServer su GitHub</a></p>
-        </footer>
-    </div>
+    <nav aria-label="Navigazione principale">
+        <div class="container">
+            <a href="/" class="nav-brand" aria-label="VibeCodders - Home">VibeCodders</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <header>
+                <a href="../../index.html" class="back-link" aria-label="Torna alla lista dei progetti">← Torna ai progetti</a>
+                <h1>ArtnetServer</h1>
+                <p class="subtitle">Art-Net to DMX Node Server</p>
+                <div class="tags" aria-label="Tecnologie utilizzate">
+                    <span class="tag">C#</span>
+                    <span class="tag">.NET 10</span>
+                    <span class="tag">WPF</span>
+                    <span class="tag">Art-Net</span>
+                    <span class="tag">DMX</span>
+                </div>
+            </header>
+
+            <main class="content">
+                <p>Questo progetto è un server <strong>Art-Net Node</strong> scritto in C# (.NET 10.0) che riceve pacchetti DMX via rete (protocollo Art-Net) e li inoltra a un'interfaccia hardware DMX. Il codice è progettato per massimizzare la condivisione logica ed è eseguibile in tre modalità distinte: <strong>GUI</strong> (Grafica), <strong>CLI</strong> (Console interattiva) e <strong>Headless</strong> (Silenziosa in background).</p>
+
+                <div class="btn-group">
+                    <a href="https://github.com/VibeCodders/ArtnetServer" target="_blank" rel="noopener noreferrer" class="btn">Visualizza su GitHub</a>
+                    <a href="https://github.com/VibeCodders/ArtnetServer/releases/latest" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">⬇️ Scarica l'ultima versione</a>
+                </div>
+
+                <h2>Modalità di Esecuzione</h2>
+                <p>Puoi selezionare la modalità desiderata passando il parametro <code>-m</code> o <code>--mode</code> all'avvio.</p>
+
+                <h3>1. Modalità GUI (Interfaccia Grafica)</h3>
+                <p>Avvia l'interfaccia utente grafica (WPF) ricca di animazioni, che mostra in tempo reale i valori dei 512 canali DMX, le statistiche dei pacchetti e permette la configurazione visuale dei parametri.</p>
+                <pre><code>dotnet run</code></pre>
+
+                <h3>2. Modalità CLI (Riga di Comando)</h3>
+                <p>Avvia un terminale testuale interattivo direttamente all'interno della console corrente. Mostra i log dell'engine in tempo reale ed espone statistiche aggregate.</p>
+                <ul>
+                    <li><code>S</code> / <code>stats</code> - Mostra le statistiche dettagliate correnti</li>
+                    <li><code>C</code> / <code>clear</code> - Pulisce la schermata della console</li>
+                    <li><code>H</code> / <code>help</code> - Mostra l'elenco dei comandi disponibili</li>
+                    <li><code>Q</code> / <code>quit</code> / <code>exit</code> - Ferma in sicurezza l'engine Art-Net</li>
+                </ul>
+                <pre><code>dotnet run -- --mode cli --driver simulation</code></pre>
+
+                <h3>3. Modalità Headless (Silenziosa / Background)</h3>
+                <p>Esegue il server in background in modo totalmente trasparente e silenzioso, senza mostrare alcuna GUI o stampare log in console. Ideale per essere integrato come servizio o script di avvio automatico.</p>
+                <pre><code>dotnet run -- --mode headless --driver simulation --universe 0</code></pre>
+
+                <h2>Parametri della Linea di Comando</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Breve</th>
+                            <th>Esteso</th>
+                            <th>Descrizione</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>-m</code></td><td><code>--mode</code></td><td>Modalità: gui, cli, headless</td><td>gui</td></tr>
+                        <tr><td><code>-i</code></td><td><code>--ip</code></td><td>Indirizzo IP di bind</td><td>0.0.0.0</td></tr>
+                        <tr><td><code>-p</code></td><td><code>--port</code></td><td>Porta UDP di ascolto</td><td>6454</td></tr>
+                        <tr><td><code>-u</code></td><td><code>--universe</code></td><td>Numero universo Art-Net</td><td>0</td></tr>
+                        <tr><td><code>-d</code></td><td><code>--driver</code></td><td>Tipo driver DMX</td><td>simulation</td></tr>
+                        <tr><td><code>-c</code></td><td><code>--com</code></td><td>Porta seriale COM</td><td>—</td></tr>
+                        <tr><td><code>-dev</code></td><td><code>--device</code></td><td>Interfaccia DMX (universo,driver,com)</td><td>—</td></tr>
+                        <tr><td><code>-h</code></td><td><code>--help</code></td><td>Mostra la guida</td><td>—</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Struttura del Progetto</h2>
+                <ul>
+                    <li><strong>Core/</strong> - Motore principale, server HTTP, merge manager, health check, logging</li>
+                    <li><strong>Drivers/</strong> - Driver di uscita DMX hardware (Enttec, OpenDMX, FTDI, ecc.)</li>
+                    <li><strong>Views/</strong> - Interfaccia grafica WPF</li>
+                    <li><strong>Tests/</strong> - Test unitari xUnit</li>
+                </ul>
+
+                <h2>API HTTP</h2>
+                <p>Quando abilitata con <code>--enable-http</code>, sono disponibili i seguenti endpoint:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metodo</th>
+                            <th>Endpoint</th>
+                            <th>Descrizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GET</td><td><code>/</code></td><td>Dashboard HTML</td></tr>
+                        <tr><td>GET</td><td><code>/api/status</code></td><td>Stato del server e delle interfacce</td></tr>
+                        <tr><td>GET</td><td><code>/api/dmx?universe=</code></td><td>Dati DMX correnti</td></tr>
+                        <tr><td>GET</td><td><code>/api/events</code></td><td>Eventi in tempo reale (SSE)</td></tr>
+                        <tr><td>GET</td><td><code>/api/universes</code></td><td>Lista universi attivi</td></tr>
+                        <tr><td>POST</td><td><code>/api/blackout</code></td><td>Attiva/disattiva blackout</td></tr>
+                        <tr><td>POST</td><td><code>/api/override/set</code></td><td>Imposta override canale</td></tr>
+                        <tr><td>POST</td><td><code>/api/override/clear-channel</code></td><td>Cancella override canale</td></tr>
+                        <tr><td>POST</td><td><code>/api/override/clear</code></td><td>Cancella tutti gli override</td></tr>
+                    </tbody>
+                </table>
+            </main>
+
+            <footer>
+                <p>VibeCodders - <a href="https://github.com/VibeCodders/ArtnetServer" target="_blank" rel="noopener noreferrer">ArtnetServer su GitHub</a></p>
+            </footer>
+        </div>
+    </main>
 </body>
 </html>

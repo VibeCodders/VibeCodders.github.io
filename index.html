@@ -1,34 +1,103 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeCodders - Progetti</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="VibeCodders - Progetti di sviluppo software. Esplora ArtnetServer e altri progetti realizzati con C#, .NET, WPF e tecnologie moderne.">
+    <meta name="keywords" content="VibeCodders, progetti , C#, .NET, WPF, Art-Net, DMX, software development, GitHub, progetti">
+    <meta name="author" content="VibeCodders">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://VibeCodders.github.io/">
+
+    <title>VibeCodders - Progetti </title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='system-ui'>⚡</text></svg>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://VibeCodders.github.io/">
+    <meta property="og:title" content="VibeCodders - Progetti ">
+    <meta property="og:description" content="Esplora i progetti di VibeCodders: ArtnetServer e altri strumenti sviluppati con C#, .NET e tecnologie moderne.">
+    <meta property="og:image" content="https://VibeCodders.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="VibeCodders - Progetti ">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="VibeCodders">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://VibeCodders.github.io/">
+    <meta name="twitter:title" content="VibeCodders - Progetti ">
+    <meta name="twitter:description" content="Esplora i progetti di VibeCodders: ArtnetServer e altri strumenti sviluppati con C#, .NET e tecnologie moderne.">
+    <meta name="twitter:image" content="https://VibeCodders.github.io/og-image.png">
+    <meta name="twitter:image:alt" content="VibeCodders - Progetti ">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "VibeCodders",
+        "url": "https://VibeCodders.github.io",
+        "logo": "https://VibeCodders.github.io/logo.png",
+        "sameAs": [
+            "https://github.com/VibeCodders"
+        ],
+        "description": "Progetti di sviluppo software"
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: #0a0a0f;
             color: #e0e0e0;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a2e;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-brand:hover {
+            text-decoration: none;
+        }
+
         header {
             padding: 60px 0 40px;
             text-align: center;
         }
-        
+
         h1 {
             font-size: 3rem;
             font-weight: 700;
@@ -38,19 +107,19 @@
             background-clip: text;
             margin-bottom: 10px;
         }
-        
+
         .subtitle {
             color: #888;
             font-size: 1.1rem;
         }
-        
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 24px;
             padding: 40px 0 80px;
         }
-        
+
         .project-card {
             background: #16161e;
             border: 1px solid #2a2a3a;
@@ -61,33 +130,33 @@
             color: inherit;
             display: block;
         }
-        
+
         .project-card:hover {
             transform: translateY(-4px);
             border-color: #667eea;
             box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
         }
-        
+
         .project-card h2 {
             font-size: 1.4rem;
             margin-bottom: 12px;
             color: #fff;
         }
-        
+
         .project-card p {
             color: #999;
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 16px;
         }
-        
+
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 16px;
         }
-        
+
         .tag {
             background: #1e1e2e;
             color: #667eea;
@@ -97,7 +166,7 @@
             font-weight: 500;
             border: 1px solid #2a2a3a;
         }
-        
+
         .card-footer {
             display: flex;
             align-items: center;
@@ -105,19 +174,19 @@
             font-size: 0.85rem;
             color: #666;
         }
-        
+
         .card-footer span {
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        
+
         .card-actions {
             display: flex;
             gap: 12px;
             margin-top: 20px;
         }
-        
+
         .card-actions a {
             flex: 1;
             text-align: center;
@@ -128,28 +197,30 @@
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
         }
-        
+
         .btn-details {
             background: #1e1e2e;
             color: #667eea;
             border: 1px solid #2a2a3a;
         }
-        
+
         .btn-details:hover {
             border-color: #667eea;
             transform: translateY(-2px);
+            text-decoration: none;
         }
-        
+
         .btn-download {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
         }
-        
+
         .btn-download:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
         }
-        
+
         footer {
             text-align: center;
             padding: 40px 0;
@@ -157,36 +228,59 @@
             font-size: 0.9rem;
             border-top: 1px solid #1a1a2e;
         }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>VibeCodders</h1>
-            <p class="subtitle">I nostri progetti</p>
-        </header>
-        
-        <main class="projects-grid">
-            <div class="project-card">
-                <h2>ArtnetServer</h2>
-                <p>Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX. Supporta modalità GUI, CLI e Headless.</p>
-                <div class="tags">
-                    <span class="tag">C#</span>
-                    <span class="tag">.NET 10</span>
-                    <span class="tag">WPF</span>
-                    <span class="tag">Art-Net</span>
-                    <span class="tag">DMX</span>
-                </div>
-                <div class="card-actions">
-                    <a href="projects/artnet-server/index.html" class="btn-details">Dettagli</a>
-                    <a href="https://github.com/VibeCodders/ArtnetServer/releases/latest" target="_blank" class="btn-download" download>Scarica</a>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
+    <nav aria-label="Navigazione principale">
+        <div class="container">
+            <a href="/" class="nav-brand" aria-label="VibeCodders - Home">VibeCodders</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <header>
+                <h1>VibeCodders</h1>
+                <p class="subtitle">I nostri progetti</p>
+            </header>
+
+            <section class="projects-grid" aria-label="Elenco progetti">
+                <article class="project-card" aria-labelledby="project-artnet-title">
+                    <h2 id="project-artnet-title">ArtnetServer</h2>
+                    <p>Server Art-Net Node scritto in C# (.NET 10.0) per ricevere pacchetti DMX via rete e inoltrarli a interfacce hardware DMX. Supporta modalità GUI, CLI e Headless.</p>
+                    <div class="tags" aria-label="Tecnologie utilizzate">
+                        <span class="tag">C#</span>
+                        <span class="tag">.NET 10</span>
+                        <span class="tag">WPF</span>
+                        <span class="tag">Art-Net</span>
+                        <span class="tag">DMX</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="projects/artnet-server/index.html" class="btn-details" aria-label="Dettagli progetto ArtnetServer">Dettagli</a>
+                        <a href="https://github.com/VibeCodders/ArtnetServer/releases/latest" target="_blank" rel="noopener noreferrer" class="btn-download" aria-label="Scarica ArtnetServer da GitHub">Scarica</a>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
             <p>VibeCodders - Progetti</p>
-        </footer>
-    </div>
+            <p style="margin-top: 8px;"><a href="https://github.com/VibeCodders" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none;">GitHub</a></p>
+        </div>
+    </footer>
 </body>
 </html>
