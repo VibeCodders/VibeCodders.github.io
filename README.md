@@ -8,10 +8,14 @@ software projects. Static site, no build step, hosted on GitHub Pages.
 | Project | Description | Stack |
 |---------|-------------|-------|
 | [ArtnetServer](https://github.com/VibeCodders/ArtnetServer) | Art-Net Node server that receives DMX over the network and forwards it to DMX hardware (GUI / CLI / Headless). | C#, .NET 10, WPF |
+| [BackgroundImageRemover](https://github.com/VibeCodders/BackgroundImageRemover) | Modern Windows desktop app for AI background removal (ONNX / SAM / GrabCut / ChromaKey) and smart image uncropping. | C#, .NET 10, WPF, ONNX, OpenCV |
 | [PostgREST](https://github.com/stignarnia/PostgREST) | Self-contained HTTP-to-PostgreSQL gateway: query, credentials and TLS certs travel inside each JSON request. | Rust, PostgreSQL, mTLS |
 | [kinect2pipe-IR](https://github.com/stignarnia/kinect2pipe-IR) | Turns a Kinect 2 into an infrared webcam on Linux for Howdy facial unlock. | C++, CMake, v4l2loopback |
 | [GeoMSTView](https://github.com/stignarnia/GeoMSTView) | Web app that computes and animates the Minimum Spanning Tree between cities from OpenStreetMap. | JavaScript, Leaflet, WebAssembly |
+| [UsernameGenerator](https://github.com/VibeCodders/UsernameGenerator) | Client-side tool that generates pronounceable random usernames with customizable style and phonetic difficulty sliders. | JavaScript, HTML, CSS, Vite |
 | [AiPareto](https://github.com/VibeCodders/AiPareto) | Static React + TypeScript (Vite) app showing the Pareto frontier of AI models by comparing OpenRouter prices and Artificial Analysis benchmarks. | TypeScript, React, Vite |
+| [ScacchiEsteso](https://github.com/VibeCodders/ScacchiEsteso) | Extended chess game and variant analysis engine built with TypeScript and modern web tech. | TypeScript, Web |
+| [telegram_calendar_planner](https://github.com/VibeCodders/telegram_calendar_planner) | Smart Telegram bot with natural language date/time parser for scheduling reminders and daily task briefings. | JavaScript, Node.js, Telegram Bot |
 
 ## How it works
 
