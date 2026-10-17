@@ -16,6 +16,8 @@ software projects. Static site, no build step, hosted on GitHub Pages.
 | [AiPareto](https://github.com/VibeCodders/AiPareto) | Static React + TypeScript (Vite) app showing the Pareto frontier of AI models by comparing OpenRouter prices and Artificial Analysis benchmarks. | TypeScript, React, Vite |
 | [ScacchiEsteso](https://github.com/VibeCodders/ScacchiEsteso) | Extended chess game and variant analysis engine built with TypeScript and modern web tech. | TypeScript, Web |
 | [telegram_calendar_planner](https://github.com/VibeCodders/telegram_calendar_planner) | Smart Telegram bot with natural language date/time parser for scheduling reminders and daily task briefings. | JavaScript, Node.js, Telegram Bot |
+| [Shelfly](https://github.com/stignarnia/shelfly) | TV shows and movies tracker for Android that syncs to personal infrastructure via WebDAV. | Kotlin, Android, WebDAV, TMDB |
+| [kwin-gpuswitch](https://github.com/stignarnia/kwin-gpuswitch) | KWin plugin that moves Plasma compositing between GPUs during a live Wayland session. | C++, KWin, KDE Plasma, Wayland |
 
 ## How it works
 
